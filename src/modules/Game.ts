@@ -1,5 +1,5 @@
 import Player from "./Player";
-import { GRID_SIZE, LEVEL_1 } from "../constants";
+import { GRID_SIZE } from "../constants";
 import Environnement from "./Environnement";
 import { createImage } from "../utils/createImage";
 
@@ -17,16 +17,23 @@ class Game {
   grounds: Environnement[];
   crates: Environnement[];
   cibles: Environnement[];
+  gameDone: boolean;
+  numberOfCible: number;
+  numberOfCibleDone: number;
 
-  constructor(width: number, height: number) {
+  constructor(width: number, height: number, level: number[][]) {
     this.width = width;
     this.height = height;
-    this.level = LEVEL_1;
+    this.level = level;
 
     this.walls = [];
     this.grounds = [];
     this.crates = [];
     this.cibles = [];
+    this.numberOfCible = 0;
+    this.numberOfCibleDone = 0;
+    this.gameDone = false;
+
     this.player = new Player(this);
     this.inputHandler();
     this.PrepareEnvironnement();
@@ -86,6 +93,7 @@ class Game {
               createImage(cibleImg)
             )
           );
+          this.numberOfCible++;
         }
 
         this.grounds.push(

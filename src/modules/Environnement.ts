@@ -88,6 +88,13 @@ class Environnement {
           this.y = newPosition;
           break;
       }
+
+      if (this.environnementsIsCollide(this.x, this.y, this.game.cibles)) {
+        this.game.numberOfCibleDone++;
+        if (this.game.numberOfCible === this.game.numberOfCibleDone) {
+          this.game.gameDone = true;
+        }
+      }
     }
   }
 

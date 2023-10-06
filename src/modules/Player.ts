@@ -80,10 +80,6 @@ class Player {
         }
         crate.move(direction);
       }
-
-      if (crate.environnementsIsCollide(crate.x, crate.y, this.game.cibles)) {
-        console.log("done");
-      }
     }
 
     directionIsHorizontal ? (this.x = newPosition) : (this.y = newPosition);
