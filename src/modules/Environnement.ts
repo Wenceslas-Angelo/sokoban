@@ -28,13 +28,17 @@ class Environnement {
     this.canMove = canMove;
   }
 
-  wallAndCrateIsCollide(crateX: number, crateY: number) {
-    for (let wall of this.game.walls) {
+  environnementsIsCollide(
+    crateX: number,
+    crateY: number,
+    environnements: Environnement[]
+  ) {
+    for (let environnement of environnements) {
       if (
-        wall.x < crateX + this.width &&
-        wall.x + wall.width > crateX &&
-        wall.y < crateY + this.height &&
-        wall.y + wall.height > crateY
+        environnement.x < crateX + this.width &&
+        environnement.x + environnement.width > crateX &&
+        environnement.y < crateY + this.height &&
+        environnement.y + environnement.height > crateY
       ) {
         return true;
       }
@@ -48,11 +52,19 @@ class Environnement {
     if (direction === "RIGHT" || direction === "LEFT") {
       newPosition =
         direction === "RIGHT" ? this.x + this.speed : this.x - this.speed;
-      isCollide = this.wallAndCrateIsCollide(newPosition, this.y);
+      isCollide = this.environnementsIsCollide(
+        newPosition,
+        this.y,
+        this.game.walls
+      );
     } else {
       newPosition =
         direction === "TOP" ? this.y - this.speed : this.y + this.speed;
-      isCollide = this.wallAndCrateIsCollide(this.x, newPosition);
+      isCollide = this.environnementsIsCollide(
+        this.x,
+        newPosition,
+        this.game.walls
+      );
     }
 
     return { isCollide, newPosition };
