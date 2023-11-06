@@ -17,10 +17,10 @@ class Player {
   private imageTop: HTMLImageElement;
   private imageDown: HTMLImageElement;
 
-  constructor(game: Game) {
+  constructor(game: Game, x: number, y: number) {
     this.game = game;
-    this.x = GRID_SIZE;
-    this.y = GRID_SIZE;
+    this.x = x;
+    this.y = y;
     this.width = GRID_SIZE;
     this.height = GRID_SIZE;
     this.speed = GRID_SIZE;

@@ -20,6 +20,8 @@ class Game {
   gameDone: boolean;
   numberOfCible: number;
   numberOfCibleDone: number;
+  xPlayer: number;
+  yPlayer: number;
 
   constructor(width: number, height: number, level: number[][]) {
     this.width = width;
@@ -33,10 +35,12 @@ class Game {
     this.numberOfCible = 0;
     this.numberOfCibleDone = 0;
     this.gameDone = false;
-
-    this.player = new Player(this);
-    this.inputHandler();
+    this.xPlayer = 50;
+    this.yPlayer = 50;
     this.PrepareEnvironnement();
+
+    this.player = new Player(this, this.xPlayer, this.yPlayer);
+    this.inputHandler();
   }
 
   update(context: CanvasRenderingContext2D) {
@@ -94,6 +98,9 @@ class Game {
             )
           );
           this.numberOfCible++;
+        } else if (column === 4) {
+          this.xPlayer = indexColumn;
+          this.yPlayer = indexRow;
         }
 
         this.grounds.push(
